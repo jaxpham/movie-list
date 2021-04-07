@@ -5,12 +5,30 @@
   "author": "Hack Reactor <curriculum.team@hackreactor.com>",
   "license": "UNLICENSED",
   "private": true,
-  "scripts": {},
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w",
+    "start": "nodemon server/index.js",
+    "live": "live-server"
+  },
   "dependencies": {
-    "jquery": "^2.2.1",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "live-server": "^1.2.1",
     "lodash": "^4.6.1",
-    "react": "^16.8.6",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "underscore": "^1.8.3"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "babel-cli": "^6.18.0",
+    "babel-loader": "^8.2.2",
+    "webpack": "^5.30.0",
+    "webpack-cli": "^4.6.0"
+  }
 }
