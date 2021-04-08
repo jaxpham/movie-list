@@ -3,6 +3,7 @@ import Header from './Header.jsx';
 import MovieList from './MovieList.jsx';
 import SearchBar from './SearchBar.jsx';
 import MovieForm from './MovieForm.jsx';
+import Toggle from './Toggle.jsx';
 
 class App extends React.Component{
   constructor(props) {
@@ -38,7 +39,7 @@ class App extends React.Component{
     }
 
     handleFilterTextChange(filterText) {
-      console.log('THis is the event', filterText)
+      // console.log('THis is the event', filterText)
       this.setState({
         filterText: filterText
       },() => {
@@ -62,6 +63,7 @@ class App extends React.Component{
         <Header />
         <MovieForm addMovie={this.addMovie}/>
         <SearchBar filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange} handleFilterGo={this.handleFilterGo} />
+        <Toggle />
         <MovieList list={this.state.movies} filterText={this.state.filterText}/>
       </div>
     )

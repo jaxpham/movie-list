@@ -4,20 +4,8 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
 
-    // this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
-    // this.handleFilterSubmit = this.handleFilterSubmit.bind(this);
     this.handleFilterGo = this.handleFilterGo.bind(this);
   }
-
-  // handleFilterTextChange(event) {
-  //   event.preventDefault();
-  //   this.props.onFilterTextChange(event.target.value);
-  // }
-
-  // handleFilterSubmit(event) {
-  //   event.preventDefault();
-  //   this.props.onFilterTextChange(event.target.value);
-  // }
 
   handleFilterGo(event) {
     event.preventDefault();
