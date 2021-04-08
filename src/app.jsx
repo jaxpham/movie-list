@@ -1,156 +1,71 @@
 import React from 'react';
-import Header from './header.jsx';
-import MovieList from './movieList.jsx';
-import SearchBar from './searchBar.jsx';
+import Header from './Header.jsx';
+import MovieList from './MovieList.jsx';
+import SearchBar from './SearchBar.jsx';
+import MovieForm from './MovieForm.jsx';
 
-class App extends React.Component {
+class App extends React.Component{
   constructor(props) {
     super(props);
 
-    const movies = props.movies
-    this.state = {movies};
-  }
+    const movies = [
+    {title: 'Mean Girls'},
+    {title: 'Hackers'},
+    {title: 'The Grey'},
+    {title: 'Sunshine'},
+    {title: 'Ex Machina'}
+    ]
 
-  handleFilterTextChange(filterText) {
-    this.setState({
-      filterText: filterText
-    });
-  }
+    const filterText = '';
+    this.state = { movies, filterText };
 
-  filterMovie(filterText) {
-    console.log(filterText);
-  }
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.addMovie = this.addMovie.bind(this);
+    this.handleFilterGo = this.handleFilterGo.bind(this);
+    }
 
-  // X From search grab the text
-  // Pass the text from search to moveList
-       // Create function in App
-       // Pass it down to search so app has acciess
-       // Take the result put it in App's state
-       // Pass state down to movielist
-  // Have movieList filter out for only the text
-  // Pass those element to the movieItem to render
+    addMovie(item) {
+      event.preventDefault();
+      const movie = { title: item };
+      // console.log(movie);
+      const movieList = this.state.movies.slice();
+      movieList.push(movie);
+      // console.log(movieList)
+      this.setState({
+        movies: movieList
+      })
+      console.log(this.state);
+    }
+
+    handleFilterTextChange(filterText) {
+      console.log('THis is the event', filterText)
+      this.setState({
+        filterText: filterText
+      },() => {
+        console.log(this.state);
+      });
+    }
+
+    handleFilterGo() {
+      const searchTerm = this.state.filterText;
+      const movieList = this.state.movies;
+      for (var i = 0; i < movieList.length; i++) {
+        if (searchTerm === movieList[i].title) {
+          this.setState({ movies: [{title: searchTerm}] });
+        }
+      }
+    }
 
   render() {
     return (
       <div>
-      <Header />
-      <SearchBar filterMovie={ this.filterMovie }/>
-      <MovieList movies={this.state.movies} />
+        <Header />
+        <MovieForm addMovie={this.addMovie}/>
+        <SearchBar filterText={this.state.filterText} onFilterTextChange={this.handleFilterTextChange} handleFilterGo={this.handleFilterGo} />
+        <MovieList list={this.state.movies} filterText={this.state.filterText}/>
       </div>
     )
   }
 }
 
 export default App;
-
-/*
-HTML CSS BabelResult Skip Results Iframe
-EDIT ON
-class ProductCategoryRow extends React.Component {
-  render() {
-    const category = this.props.category;
-    return (
-      <tr>
-        <th colSpan="2">
-          {category}
-        </th>
-      </tr>
-    );
-  }
-}
-
-class ProductRow extends React.Component {
-  render() {
-    const product = this.props.product;
-    const name = product.stocked ?
-      product.name :
-      <span style={{color: 'red'}}>
-        {product.name}
-      </span>;
-
-    return (
-      <tr>
-        <td>{name}</td>
-        <td>{product.price}</td>
-      </tr>
-    );
-  }
-}
-
-class ProductTable extends React.Component {
-  render() {
-    const rows = [];
-    let lastCategory = null;
-
-    this.props.products.forEach((product) => {
-      if (product.category !== lastCategory) {
-        rows.push(
-          <ProductCategoryRow
-            category={product.category}
-            key={product.category} />
-        );
-      }
-      rows.push(
-        <ProductRow
-          product={product}
-          key={product.name} />
-      );
-      lastCategory = product.category;
-    });
-
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-    );
-  }
-}
-
-class SearchBar extends React.Component {
-  render() {
-    return (
-      <form>
-        <input type="text" placeholder="Search..." />
-        <p>
-          <input type="checkbox" />
-          {' '}
-          Only show products in stock
-        </p>
-      </form>
-    );
-  }
-}
-
-class FilterableProductTable extends React.Component {
-  render() {
-    return (
-      <div>
-        <SearchBar />
-        <ProductTable products={this.props.products} />
-      </div>
-    );
-  }
-}
-
-
-const PRODUCTS = [
-  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
-  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
-  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
-  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
-  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
-  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
-];
-
-ReactDOM.render(
-  <FilterableProductTable products={PRODUCTS} />,
-  document.getElementById('container')
-);
-
-*/
